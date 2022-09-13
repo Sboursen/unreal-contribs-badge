@@ -1,29 +1,33 @@
-import type { IContributionDay } from './contribution-day';
+export type ContributionDay = { date: Date; commitCount: number };
 
 export default class ContributionWeek {
-  private contributionArray: IContributionDay[];
-  private weekNumber: number;
+  private contributionWeekArray: Array<ContributionDay>;
+  private currentMonth: number;
 
   constructor(
-    contributionArray: Array<IContributionDay>,
-    weekNumber: number
+    contributionWeekArray: Array<ContributionDay>,
   ) {
-    this.weekNumber = weekNumber;
-    this.contributionArray = [...contributionArray]
+    if (this.validContributionWeekArray(contributionWeekArray)) {
+      this.contributionWeekArray = [...contributionWeekArray];
+      this.currentMonth = contributionWeekArray[3].date.getMonth();
+    } else {
+      throw Error("The contribution array is not valid");
+    }
   }
 
-  private validateContributionArray(contributionArray: Array<IContributionDay>): boolean {
-    if (contributionArray.length !== 7) return false;
+  private validContributionWeekArray(
+    contributionWeekArray: Array<ContributionDay>,
+  ): boolean {
+    if (contributionWeekArray.length !== 7) return false;
     let days = [0, 1, 2, 3, 4, 5, 6];
 
-    for ( let i = 0; i < days.length; i++) {
-      const contributionDay = contributionArray[i];
-      if (contributionDay.getDayOfWeek() !== days[i]) return false;
+    for (let i = 0; i < days.length; i++) {
+      const contributionDay = contributionWeekArray[i];
+      if (contributionDay.date.getDay() !== days[i]) return false;
     }
-
     return true;
   }
 
-  public getContributionArray = (): IContributionDay[] => this.contributionArray;
-  public getWeekNumber = (): number => this.weekNumber;
+  public getCurrentMonth = () => this.currentMonth;
+  public getData = () => this.contributionWeekArray;
 }
