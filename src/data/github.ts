@@ -13,7 +13,7 @@ export type ValidUserContributionsType = {
           contributionDays: {
             contributionCount: number;
             date: string;
-            weekday: [0, 1, 2, 3, 4, 5, 6];
+            weekday: number;
           }[];
         }[];
       };
