@@ -2,6 +2,7 @@ import axios from 'axios';
 const TOKEN = process.env.GH_TOKEN;
 
 export type ValidUserContributionsType = {
+  year: number;
   user: {
     createdAt: string;
     isHireable: boolean;
@@ -22,13 +23,15 @@ export type ValidUserContributionsType = {
 
 export type UnValidUserContributionsType = {
   user: null;
+  year: number;
 };
 
 export type getUserContributionsResponseType =
   | ValidUserContributionsType
   | UnValidUserContributionsType;
 
-const currentYear = Math.floor(Date.now() / (1000 * 60 * 60 * 365));
+const today = new Date(Date.now()) ;
+const currentYear = today.getFullYear();
 
 export function getUserContributions(
   userHandle: string,
@@ -74,6 +77,6 @@ export default async function getUserContributions(
   };
 
   const response = await axios.request(options);
-  const data: getUserContributionsResponseType = response.data.data;
+  const data: getUserContributionsResponseType = {...response.data.data, year};
   return data;
 }
