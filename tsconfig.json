@@ -15,6 +15,11 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/externalapi/__test__/github.test.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/data/__test__/github.test.js"
+  ],
   "exclude": ["node_modules"]
 }
