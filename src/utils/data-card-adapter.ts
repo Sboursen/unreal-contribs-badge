@@ -128,15 +128,6 @@ const createFullDataCard = ({
     cardData.push(contributionWeek);
   }
 
-  console.log(
-    '----------------------------------------------------------------',
-  );
-  console.log(
-    cardData.map((data) =>
-      data.getData().map((data) => data.date.toUTCString()),
-    ),
-  );
-
   return cardData;
 };
 
