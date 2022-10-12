@@ -1,0 +1,30 @@
+name: Linter
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.14.x]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Setup ESLint
+        run: |
+          npm ci
+          npm run lint
