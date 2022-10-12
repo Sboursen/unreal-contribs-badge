@@ -1,6 +1,12 @@
 import getUserContributions from '../github';
 
 describe('getUserContributions', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+  afterAll(() => {
+    jest.setTimeout(5000);
+  });
   it('should resolve for the default userHandle and year', async () => {
     const year = 2022;
     const userHandle = 'Sboursen';
