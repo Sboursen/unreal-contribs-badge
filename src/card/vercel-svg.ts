@@ -1,7 +1,7 @@
-export default function createCard(
+export default function createVercelCard(
   width: number,
   height: number,
-  backgroundColor: string = "#111",
+  backgroundColor: string = '#111',
 ): string {
   return `<svg
       width="${width}px"
